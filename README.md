@@ -1,8 +1,10 @@
 # Real-EState-Website
-Real Estate website for buying and selling houses made using django and bootstrap4. Any user can register and make a listing for selling a property
+Là ứng dụng dùng để đăng bài, mua bán bất động sản, phân tích thị trường bất động sản
 
-developed using python
+Ngôn ngữ: Python3.6
 
-![](https://raw.githubusercontent.com/manumanoj0010/Real-State-Website/master/Screenshot.png)
+Framework Django
 
-`Demo Video` : <https://youtu.be/Or06u-DSFfY>
+
+
+
