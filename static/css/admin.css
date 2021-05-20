@@ -1,31 +1,31 @@
 #header {
-  height: 50px;
-  background: #10284c;
-  color: #fff;
+    height: 50px;
+    background: #10284c;
+    color: #fff;
 }
 
 #branding h1 {
-  color: #fff;
+    color: #fff;
 }
 
 a:link,
 a:visited {
-  color: #10284e;
+    color: #10284e;
 }
 
 div.breadcrumbs {
-  background: #30caa0;
-  color: #10283e;
+    background: #30caa0;
+    color: #10283e;
 }
 
 div.breadcrumbs a {
-  color: #333;
+    color: #333;
 }
 
 .module h2,
 .module caption,
 .inline-group h2 {
-  background: #30caa0;
+    background: #30caa0;
 }
 
 .button,
@@ -33,6 +33,19 @@ input[type="submit"],
 input[type="button"],
 .submit-row input,
 a.button {
-  background: #10284e;
-  color: #fff;
+    background: #10284e;
+    color: #fff;
+}
+
+.upload-btn {
+    display: block;
+    float: left;
+    padding: 3px 12px;
+    background: var(--object-tools-bg);
+    color: var(--object-tools-fg);
+    font-weight: 400;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 15px;
 }

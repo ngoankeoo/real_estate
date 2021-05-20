@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.index, name='listings'),
     path('<int:listing_id>', views.lisitng, name='listing'),
     path('search', views.search, name='search'),
+    path('/upload_csv/', views.upload_csv, name='upload_csv')
 ]

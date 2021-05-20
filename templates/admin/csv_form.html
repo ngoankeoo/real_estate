@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}
+
+
+{% block content %}
+    <div>
+        <form action="." method="POST" enctype="multipart/form-data">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" class="default align-self-center"></input>
+        </form>
+    </div>
+    <br />
+
+{% endblock %}
