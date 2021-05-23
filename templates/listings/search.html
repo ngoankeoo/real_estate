@@ -10,26 +10,18 @@
           <form action="{% url 'search' %}">
             <!-- Form Row 1 -->
             <div class="form-row">
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label class="sr-only">Từ khóa</label>
                 <input type="text" name="keywords" class="form-control" placeholder="Từ khóa" value="{{ value.keywords}}">
               </div>
 
-              <div class="col-md-4 mb-3">
-                <label class="sr-only">Thành phố</label>
-                <input type="text" name="city" class="form-control" placeholder="Thành phố"  value="{{ value.city}}">
-              </div>
 
-              <div class="col-md-4 mb-3">
-                <label class="sr-only">Tỉnh</label>
-                <select name="state" class="form-control">
-                  <option selected="true" disabled="disabled">Tỉnh</option>
-                  {% for key,value in state_choices.items %}
-                  <option value="{{key}}"
-                      {% if key == values.state %} 
-                      selected
-                      {% endif %}
-                  >{{value}}</option>
+              <div class="col-md-6 mb-3">
+                <label class="sr-only">Quận/Huyện</label>
+                <select name="district" class="form-control">
+                  <option selected="true" disabled="disabled">Quận/Huyện</option>
+                  {% for value in district_choices %}
+                  <option value="{{value}}">{{value}}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -37,9 +29,9 @@
             <!-- Form Row 2 -->
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <label class="sr-only">Phòng ngủ</label>
+                <label class="sr-only">Kích thước</label>
                 <select name="bedrooms" class="form-control">
-                  <option selected="true" disabled="disabled">Phòng ngủ</option>
+                  <option selected="true" disabled="disabled">Kích thước</option>
                   {% for key,value in bedroom_choices.items %}
                     <option value="{{key}}"
                     {% if key == values.bedrooms %} 
