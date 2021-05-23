@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from listings.models import Listing
 from realtors.models import Realtor
-from listings.choices import price_choices, bedroom_choices
+from listings.choices import price_choices, sqrt_choices
 
 
 # Create your views here.
@@ -13,7 +13,7 @@ def index(request):
     context = {
         'listings': listings,
         'district_choices': list(district),
-        'bedroom_choices': bedroom_choices,
+        'sqrt_choices': sqrt_choices,
         'price_choices': price_choices,
     }
     return render(request, 'pages/index.html', context)
