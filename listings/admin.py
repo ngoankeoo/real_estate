@@ -7,6 +7,7 @@ from django.contrib import admin
 from .models import Listing
 from .views import upload_csv
 
+
 class ListingAdmin(admin.ModelAdmin):
     change_list_template = "admin/upload_csv.html"
     list_display = ('id', 'title', 'is_published',
