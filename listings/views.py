@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from .models import Listing
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from .choices import price_choices, bedroom_choices, state_choices
+from .choices import price_choices, sqrt_choices, state_choices
 from django.forms import forms
 from django.shortcuts import redirect
 from realtors.models import Realtor
@@ -59,10 +59,10 @@ def search(request):
             queryset_list = queryset_list.filter(district=district)
 
     # Bedrooms
-    if 'bedrooms' in request.GET:
-        bedrooms = request.GET['bedrooms']
-        if bedrooms:
-            queryset_list = queryset_list.filter(bedrooms__lte=bedrooms)
+    if 'sqrt' in request.GET:
+        sqrt = request.GET['sqrt']
+        if sqrt:
+            queryset_list = queryset_list.filter(sqft__lte=sqrt)
 
     # Price
     if 'price' in request.GET:
@@ -72,7 +72,7 @@ def search(request):
 
     context = {
         'district_choices': list(districts),
-        'bedroom_choices': bedroom_choices,
+        'sqrt_choices': sqrt_choices,
         'price_choices': price_choices,
         'listings': queryset_list,
         'values': request.GET,

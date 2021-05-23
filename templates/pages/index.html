@@ -44,13 +44,13 @@
                             <!-- Form Row 2 -->
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="sr-only">Kích thước</label>
-                                    <select name="bedrooms" class="form-control">
+                                    <label class="sr-only">Kích thước (m²)</label>
+                                    <select name="sqrt" class="form-control">
                                         <option selected="true" disabled="disabled"
-                                        >Kích thước
+                                        >Kích thước (m²)
                                         </option
                                         >
-                                        {% for key,value in bedroom_choices.items %}
+                                        {% for key,value in sqrt_choices.items %}
                                             <option value="{{ key }}">{{ value }}</option>
                                         {% endfor %}
                                     </select>
@@ -58,7 +58,7 @@
                                 <div class="col-md-6 mb-3">
                                     <select name="price" class="form-control" id="type">
                                         <option selected="true" disabled="disabled"
-                                        >Giá lớn nhất
+                                        >Giá lớn nhất (triệu/m²)
                                         </option
                                         >
                                         {% for key,value in price_choices.items %}
