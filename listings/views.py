@@ -6,7 +6,6 @@ from django.forms import forms
 from django.shortcuts import redirect
 from realtors.models import Realtor
 from listings.models import Listing
-from datetime import datetime
 import pandas
 
 
@@ -40,7 +39,7 @@ def lisitng(request, listing_id):
 
 def search(request):
     queryset_list = Listing.objects.order_by('-list_data')
-    district = Listing.objects.order_by('district').distinct().values_list('district', flat=True)
+    districts = Listing.objects.order_by('district').distinct().values_list('district', flat=True)
     # keywords
     if 'keywords' in request.GET:
         keywords = request.GET['keywords']
@@ -72,7 +71,7 @@ def search(request):
             queryset_list = queryset_list.filter(price__lte=price)
 
     context = {
-        'district_choices': list(district),
+        'district_choices': list(districts),
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
         'listings': queryset_list,

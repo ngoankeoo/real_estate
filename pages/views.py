@@ -12,7 +12,7 @@ def index(request):
     print('index list district', list(district))
     context = {
         'listings': listings,
-        'state_choices': list(district),
+        'district_choices': list(district),
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
     }
