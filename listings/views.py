@@ -40,7 +40,7 @@ def lisitng(request, listing_id):
 
 def search(request):
     queryset_list = Listing.objects.order_by('-list_data')
-
+    district = Listing.objects.order_by('district').distinct().values_list('district', flat=True)
     # keywords
     if 'keywords' in request.GET:
         keywords = request.GET['keywords']
@@ -54,10 +54,10 @@ def search(request):
             queryset_list = queryset_list.filter(city__iexact=city)
 
     # State
-    if 'state' in request.GET:
-        state = request.GET['state']
-        if state:
-            queryset_list = queryset_list.filter(city__iexact=state)
+    if 'district' in request.GET:
+        district = request.GET['district']
+        if district:
+            queryset_list = queryset_list.filter(district=district)
 
     # Bedrooms
     if 'bedrooms' in request.GET:
@@ -72,7 +72,7 @@ def search(request):
             queryset_list = queryset_list.filter(price__lte=price)
 
     context = {
-        'state_choices': state_choices,
+        'district_choices': list(district),
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
         'listings': queryset_list,
@@ -102,13 +102,37 @@ def upload_csv(request):
             title = data['title']
             image = data['image']
             content = data['content']
-
+            area = data['area']
             up_time = data['up_time']
             contact_name = data['contact_name']
             contact_phone = data['contact_phone']
             realtor = Realtor(name=contact_name, phone=contact_phone, description="This is realtor from crawler")
+            district = location.split(',')[0].strip()
+            state = location.split(',')[1].strip()
+            if area == "Không xác định":
+                area = 0
+            else:
+                area = area.split()[0]
+
+            if price != "Giá thỏa thuận":
+                print(price)
+                price_split = price.split()
+                if area == 0:
+                    price = 0
+                elif price_split[1] == "tỷ":
+                    price = round(float(price_split[0]) * 1000 / float(area), 2)
+                elif price_split[1] == "triệu":
+                    price = round(float(price_split[0]) / float(area), 2)
+                else:
+                    price = round(float(price_split[0]), 2)
+            else:
+                price = 0
+            print('price:  {0} trieu/m2'.format(price))
+            print('sqrt: {0} m2'.format(area))
             realtor.save()
-            listing = Listing(realtor=realtor, address=location,image_link=image,  title=title, price=0, description=content,
+            listing = Listing(realtor=realtor, address=location,district=district,
+                              image_link=image, title=title, price=price,
+                              description=content, sqft=area, state=state,
                               city=location.split(',')[1])
             listing.save()
 

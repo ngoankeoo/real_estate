@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <h1 class="display-4">{{ listing.title }}</h1>
                     <p class="lead">
-                        <i class="fas fa-map-marker"></i>{{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}
+                        <i class="fas fa-map-marker"></i>{{ listing.state }} {{ listing.zipcode }}
                     </p>
                 </div>
             </div>
@@ -96,16 +96,12 @@
                         <div class="col-md-6">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-secondary">
-                                    <i class="fas fa-money-bill-alt"></i> Hỏi giá:
-                                    <span class="float-right">${{ listing.price }}</span>
+                                    <i class="fas fa-money-bill-alt"></i> Giá:
+                                    <span class="float-right">{{ listing.price }} triệu/m²</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-bed"></i> Phòng ngủ:
                                     <span class="float-right">{{ listing.bedrooms }}</span>
-                                </li>
-                                <li class="list-group-item text-secondary">
-                                    <i class="fas fa-bath"></i> Phòng tắm:
-                                    <span class="float-right">{{ listing.bathrooms }}</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-car"></i> Nhà để xe:
@@ -117,17 +113,16 @@
                         <div class="col-md-6">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-secondary">
-                                    <i class="fas fa-th-large"></i>Thước vuông:
-                                    <span class="float-right">{{ listing.sqft }}</span>
+                                    <i class="fas fa-bath"></i> Phòng tắm:
+                                    <span class="float-right">{{ listing.bathrooms }}</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
-                                    <i class="fas fa-square"></i>Kích thước lô:
-                                    <span class="float-right">{{ listing.lot_size }}Acres
-                      </span>
+                                    <i class="fas fa-th-large"></i>Kích thước:
+                                    <span class="float-right">{{ listing.sqft }} m²</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-calendar"></i> Ngày niêm yết:
-                                    <span class="float-right">{{ listing.list_date }}</span>
+                                    <span class="float-right">{{ listing.list_data | timesince }}</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-bed"></i> Môi giới nhà đất:

@@ -67,8 +67,14 @@
         class="nav-item mr-3"
         {% endif %}
         >
-          <a class="nav-link" href="{% url 'dashboard' %}">
+        {% if user.username == 'admin' %}
+             <a class="nav-link" href="/admin">
             Xin chào {{ user.username }} </a>
+        {% else %}
+            <a class="nav-link" href="{% url 'dashboard' %}">
+            Xin chào {{ user.username }} </a>
+        {% endif %}
+
         </li>
         <li class="nav-item mr-3">
           <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">

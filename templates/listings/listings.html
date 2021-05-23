@@ -48,27 +48,21 @@
           </div>
           <div class="card-body">
             <div class="listing-heading text-center">
-              <h4 class="text-primary">{{ listing.title }}</h4>
+              <h5 class="text-primary">{{ listing.title }}</h5>
               <p>
                 <i class="fas fa-map-marker text-secondary"></i>
-                {{ listing.city }} {{ listing.state }} {{ listing.zipcode }}
+                {{ listing.state }} {{ listing.zipcode }}
               </p>
             </div>
             <hr />
             <div class="row py-2 text-secondary">
-              <div class="col-6">
-                <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}
-              </div>
-              <div class="col-6">
-                <i class="fas fa-car"></i> Nhà để xe: {{ listing.garage }}
-              </div>
+              <div class="col-12">
+                <i class="fas fa-th-large"></i> Kích thước: {{ listing.sqft|safe }} m²</div>
+
             </div>
             <div class="row py-2 text-secondary">
-              <div class="col-6">
-                <i class="fas fa-bed"></i> Phòng ngủ: {{ listing.bedrooms }}
-              </div>
-              <div class="col-6">
-                <i class="fas fa-bath"></i> Phòng tắm: {{ listing.bathrooms }}
+               <div class="col-12">
+                <i class="fas fa-money-bill-alt"></i> Giá: {{ listing.price|safe }} triệu/m²
               </div>
             </div>
             <hr />
