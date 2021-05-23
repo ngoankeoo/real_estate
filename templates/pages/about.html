@@ -48,19 +48,20 @@
       <div class="col-md-4">
         {% if mvp_realtors %}
         {% for realtor in mvp_realtors %}
-        <div class="card">
-            <img
-              class="card-img-top"
-              src="{{realtor.photo.url }}"
-              alt="Seller of the month"
-            />
-        <div class="card-body">
-            <h5 class="card-title">Seller Of The Month</h5>
-            <h6 class="text-secondary">{{realtor.name}}</h6>
-            <p class="card-text">
-             {{realtor.description}}
-            </p>
-          </div>
+{#        <div class="card">#}
+{#            <img#}
+{#              class="card-img-top"#}
+{#              src="{{realtor. }}"#}
+{#              alt="Seller of the month"#}
+{#            />#}
+{#        <div class="card-body">#}
+{#            <h5 class="card-title">Seller Of The Month</h5>#}
+{#            <h6 class="text-secondary">{{realtor.name}}</h6>#}
+{#            <p class="card-text">#}
+{#             {{realtor.description}}#}
+{#             {{ realtor.phone }}#}
+{#            </p>#}
+{#          </div>#}
 
         {% endfor %}
         {% endif %}
@@ -93,18 +94,19 @@
       {% for realtor in realtors %}
       
       <div class="col-md-4">
-          <img
-            src="{{realtor.photo.url}}"
-            alt=""
-            class="rounded-circle mb-3"
-          />
+{#          <img#}
+{#            src="{{realtor.photo.url}}"#}
+{#            alt=""#}
+{#            class="rounded-circle mb-3"#}
+{#          />#}
           <h4>{{realtor.name}}</h4>
           <p class="text-success">
             <i class="fas fa-award text-success mb-3"></i> Môi giới nhà đất
           </p>
           <hr />
-          <p><i class="fas fa-phone"></i>{{realtor.phone}}</p>
-          <p><i class="fas fa-envelope-open"></i> {{realtor.email}}</p>
+          <br>
+          <p><i class="fas fa-phone"></i> {{realtor.phone}} </p>
+{#          <p><i class="fas fa-envelope-open"></i> {{realtor.email}}</p>#}
         </div>
 
       {% endfor %}

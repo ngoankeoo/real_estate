@@ -1,0 +1,39 @@
+{% extends 'base.html' %}{% load humanize %}
+{% load i18n %}
+
+{% block content %}
+    <div id="container" style="width: 75%; align-content: center;">
+        <canvas id="analysis" data-url="{% url 'analysis' %}"></canvas>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <script>
+
+        var config = {
+            type: 'bar',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: 'Real Estate Analysis',
+                    backgroundColor: 'blue',
+                    data: {{ data|safe }}
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Real Estate Analysis'
+                }
+            }
+        }
+        window.onload = function () {
+            var ctx = document.getElementById('analysis').getContext('2d');
+            window.myPie = new Chart(ctx, config);
+        };
+    </script>
+{% endblock %}

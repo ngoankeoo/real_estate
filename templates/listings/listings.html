@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% load humanize %} 
 {% block title %} | Browse Property Listings {% endblock %}
-
+{% load mathfilters %}
 {% block content %}
 
 <section id="showcase-inner" class="py-5 text-white">
@@ -120,10 +120,14 @@
           <li class="page-item active">
             <a class="page-link">{{ i }}</a>
           </li>
+          {% elif listings.number|sub:i|abs > 18 or i < listings.number  %}
+              <li class="page-item">
+                <a href="?page={{ i }}" class="page-link hidden">{{ i }}</a>
+              </li>
           {% else %}
-          <li class="page-item">
-            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
-          </li>
+               <li class="page-item">
+                <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+              </li>
           {% endif %}
            {% endfor %} 
           {% if listings.has_next %}
