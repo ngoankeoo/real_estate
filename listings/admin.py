@@ -5,7 +5,7 @@ from django.contrib import admin
 # Register your models here.
 
 from .models import Listing
-from .views import upload_csv
+from .views import upload_csv, data_mining
 
 
 class ListingAdmin(admin.ModelAdmin):
@@ -23,6 +23,7 @@ class ListingAdmin(admin.ModelAdmin):
         urls = super().get_urls()
         my_urls = [
             path('upload_csv/', upload_csv),
+            path('data_mining/', data_mining),
         ]
         print("My_urls + urls {0}".format(my_urls + urls))
         return my_urls + urls

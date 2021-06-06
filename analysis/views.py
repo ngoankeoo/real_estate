@@ -9,13 +9,14 @@ def index(request):
     :param request:
     :return:
     """
-    # labels = [u"Quốc Oai", u"Thạch thất", "Chương Mỹ", "Ba Vì"]
+
     queryset_list = Listing.objects.order_by('-price')
     districts = Listing.objects.order_by('district').distinct().values_list('district', flat=True)
     if 'district' in request.GET:
         district = request.GET['district']
         if district:
             queryset_list = queryset_list.filter(district=district)
+
     # print(list(queryset_list))
     count = 0
     labels = []
