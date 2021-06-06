@@ -1,11 +1,12 @@
 from django.shortcuts import get_object_or_404, render
-from .models import Listing
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .choices import price_choices, sqrt_choices, state_choices
 from django.forms import forms
 from django.shortcuts import redirect
 from realtors.models import Realtor
 from listings.models import Listing
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
 import pandas
 
 
@@ -29,9 +30,14 @@ def index(request):
 
 def lisitng(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
-
+    relate_listing = []
+    print(listing.relate_real_estate.split(','))
+    for id in listing.relate_real_estate.split(','):
+        if id != '':
+            relate_listing.append(get_object_or_404(Listing, pk=int(id)))
     context = {
-        'listing': listing
+        'listing': listing,
+        'relate_listing': relate_listing,
     }
 
     return render(request, 'listings/listing.html', context)
@@ -129,7 +135,7 @@ def upload_csv(request):
             print('price:  {0} trieu/m2'.format(price))
             print('sqrt: {0} m2'.format(area))
             realtor.save()
-            listing = Listing(realtor=realtor, address=location,district=district,
+            listing = Listing(realtor=realtor, address=location, district=district,
                               image_link=image, title=title, price=price,
                               description=content, sqft=area, state=state,
                               city=location.split(',')[1])
@@ -140,4 +146,35 @@ def upload_csv(request):
     payload = {"form": form}
     return render(
         request, "admin/csv_form.html", payload
+    )
+
+
+def data_mining(request):
+    """
+    This function use tf-idf to calculate the 5 relate real-estate
+    :param request:
+    :return:
+    """
+    query_list = Listing.objects.all().order_by('id')
+    all_data = ['' for i in range(len(query_list.values()))]
+    for data in query_list.values():
+        print(data['id'])
+        print(f'relate_real_estate {data["relate_real_estate"]}')
+        all_data[data['id'] - 1] = data['title'] + " " + str(data['price']) + " " + data['address'] + data[
+            'description']
+    print(f'len {len(all_data)}')
+    relate_real_esate = []
+    tfidf = TfidfVectorizer().fit_transform(all_data)
+
+    for i in range(0, len(all_data) - 1):
+        cosine_similarities = linear_kernel(tfidf[i:i + 1], tfidf).flatten()
+        relate_real_esate.append(cosine_similarities.argsort()[:-5:-1])
+        list_ids = ""
+        for value in cosine_similarities.argsort()[:-5:-1]:
+            list_ids = list_ids + str(value) + ","
+        list_ids.lstrip(",")
+        print(list_ids)
+        Listing.objects.filter(id=i+1).update(relate_real_estate=list_ids)
+    return render(
+        request, "admin/base_site.html"
     )

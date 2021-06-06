@@ -144,14 +144,22 @@
                             <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="Seller of the month">
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title">Người môi giới bất động sản</h5>
+                            <h6 class="card-title">Người môi giới bất động sản</h6>
                             <h6 class="text-secondary">{{ listing.realtor }}</h6>
                             <h6> {{ listing.realtor.phone }}</h6>
                         </div>
                     </div>
-                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Liên
-                        hệ
-                    </button>
+
+                    <div class="card mb-3">
+                        <h6>Danh sách bất động sản liên quan</h6>
+                        {% if relate_listing %} {% for listing in relate_listing %}
+                            <div class="card-body">
+                                <img class="card-img-top" src="{{ listing.image_link }}" alt=""/>
+                                <a href="{% url 'listing' listing.id %}">{{ listing.title }}</a>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

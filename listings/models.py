@@ -30,6 +30,7 @@ class Listing(models.Model):
     photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     is_published = models.BooleanField(default=True)
     list_data = models.DateTimeField(default=datetime.now, blank=True)
+    relate_real_estate = models.CharField(max_length=200)
 
     def __str__(self):
         return self.title
