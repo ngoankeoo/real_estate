@@ -168,7 +168,7 @@ def data_mining(request):
 
     for i in range(0, len(all_data) - 1):
         cosine_similarities = linear_kernel(tfidf[i:i + 1], tfidf).flatten()
-        relate_real_esate.append(cosine_similarities.argsort()[:-5:-1])
+        relate_real_esate.append(cosine_similarities.argsort()[1:5:1])
         list_ids = ""
         for value in cosine_similarities.argsort()[:-5:-1]:
             list_ids = list_ids + str(value) + ","

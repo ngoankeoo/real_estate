@@ -2,3 +2,5 @@ django
 psycopg2
 Pillow==8.1.0
 django-mathfilters
+sklearn
+pandas
